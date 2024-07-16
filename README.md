@@ -16,6 +16,8 @@ A mobile application for controlling a drone, developed using Android Jetpack Co
 ## Development Status
 The project is currently under active development. We are continuously adding new features and improving the user experience. Stay tuned for updates!
 
+# Screenshots
+
 ![image](https://github.com/user-attachments/assets/12563499-d33e-42be-9bc1-77bf71a44c57)
 
 ![image](https://github.com/user-attachments/assets/e816be7d-bffc-4d4c-9a2d-da921164ec4a)
