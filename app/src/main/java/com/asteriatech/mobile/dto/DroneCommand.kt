@@ -8,7 +8,7 @@ sealed class DroneCommand {
     data class TakeOff(val speed:Speed) : DroneCommand() //Kalkış
 
     @Serializable
-    data class Land(val speed:Speed) : DroneCommand() //İniş
+    data class Landing(val speed:Speed) : DroneCommand() //İniş
 
     @Serializable
     data class MoveTo(val location: Location, val speed: Speed) : DroneCommand() //Belirli bir konuma gitme

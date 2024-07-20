@@ -7,6 +7,7 @@ plugins {
     idea
 
 
+
 }
 
 android {
@@ -24,7 +25,15 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        buildFeatures {
+            buildConfig = true
+        }
+
+
     }
+
+
 
     buildTypes {
         release {
@@ -34,6 +43,7 @@ android {
                 "proguard-rules.pro"
             )
         }
+
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
@@ -103,6 +113,7 @@ dependencies {
     implementation(libs.accompanistPager)
     implementation(libs.accompanistPagerIndicators)
     implementation(libs.pagingCommonAndroid)
+    implementation(kotlin("reflect"))
 
 
 }

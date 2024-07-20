@@ -1,14 +1,9 @@
 package com.asteriatech.mobile.di
 
-import com.asteriatech.mobile.data.model.WebSocketMessage
-import com.asteriatech.mobile.data.remote.websocket.WebSocketThermalDataChannelClient
 import com.asteriatech.mobile.data.remote.websocket.WebsocketServoEngineControllerClient
-import com.asteriatech.mobile.data.remote.websocket.common.WebSocketListener
-import com.asteriatech.mobile.data.remote.websocket.common.WebSocketListenerImpl
+import com.asteriatech.mobile.data.remote.websocket.listeners.WebSocketActionListenerImpl
 import com.asteriatech.mobile.data.repository.WebSocketServoEngineControllerChannelRepository
-import com.asteriatech.mobile.data.repository.WebSocketThermalDataChannelRepository
 import com.asteriatech.mobile.domain.WebSocketServoEngineControllerChannelService
-import com.asteriatech.mobile.domain.WebSocketThermalDataChannelService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,8 +17,13 @@ object WebsocketServoEngineControllerModule {
     @Provides
     @WebSocketChannel(WebSocketChannels.SERVO_ENGINE_CONTROLLER_CHANNEL)
     fun provideServoEngineControllerUrl(): String {
-        val url =CommunicationProtocolType.WS + ServerInformation.SERVER_IP + ServerInformation.SERVER_PORT +ServerInformation.SERVO_ENGINE_CONTROLLER_ENDPOINT
-        return url
+        val customURL = CustomURL.Builder()
+            .communicationProtocolType(CommunicationProtocolType.WS)
+            .serverIp(ServerInformation.SERVER_IP)
+            .serverPort(ServerInformation.SERVER_PORT)
+            .endPoint(ServerInformation.EndPoints.SERVO_ENGINE_CONTROLLER_ENDPOINT)
+            .build()
+        return customURL
     }
 
     @Provides
@@ -45,7 +45,7 @@ object WebsocketServoEngineControllerModule {
     @WebSocketChannel(WebSocketChannels.SERVO_ENGINE_CONTROLLER_CHANNEL)
     fun provideWebSocketServoEngineControllerChannelService(
         @WebSocketChannel(WebSocketChannels.SERVO_ENGINE_CONTROLLER_CHANNEL) webSocketServoEngineControllerClient: WebsocketServoEngineControllerClient,
-        webSocketListener: WebSocketListenerImpl
+        webSocketListener: WebSocketActionListenerImpl
     ): WebSocketServoEngineControllerChannelService {
         return WebSocketServoEngineControllerChannelService(
             webSocketServoEngineControllerClient,
@@ -59,7 +59,9 @@ object WebsocketServoEngineControllerModule {
     fun provideWebSocketServoEngineControllerRepository(
         @WebSocketChannel(WebSocketChannels.SERVO_ENGINE_CONTROLLER_CHANNEL) webSocketServoEngineControllerChannelService: WebSocketServoEngineControllerChannelService
     ): WebSocketServoEngineControllerChannelRepository {
-        return WebSocketServoEngineControllerChannelRepository(webSocketServoEngineControllerChannelService)
+        return WebSocketServoEngineControllerChannelRepository(
+            webSocketServoEngineControllerChannelService
+        )
     }
 
 
