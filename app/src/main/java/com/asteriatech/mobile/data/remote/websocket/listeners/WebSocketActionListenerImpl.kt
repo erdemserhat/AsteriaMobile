@@ -1,17 +1,17 @@
-package com.asteriatech.mobile.data.remote.websocket.common
+package com.asteriatech.mobile.data.remote.websocket.listeners
 
 import androidx.lifecycle.MutableLiveData
-import com.asteriatech.mobile.data.model.WebSocketMessage
+import com.asteriatech.mobile.data.remote.websocket.model.WebSocketActionMessage
 import javax.inject.Inject
 
-class WebSocketListenerImpl @Inject constructor() : WebSocketListener {
-    val webSocketMessages: MutableLiveData<WebSocketMessage> = MutableLiveData()
+class WebSocketActionListenerImpl @Inject constructor() : WebSocketActionListener {
+    val webSocketMessages: MutableLiveData<WebSocketActionMessage> = MutableLiveData()
 
     override fun onOpen() {
         // Bağlantı açıldığında yapılacak işlemler
     }
 
-    override fun onMessageReceived(message: WebSocketMessage) {
+    override fun onMessageReceived(message: WebSocketActionMessage) {
         webSocketMessages.postValue(message)
     }
 

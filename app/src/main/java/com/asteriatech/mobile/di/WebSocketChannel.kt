@@ -6,3 +6,6 @@ import javax.inject.Qualifier
 @Retention(AnnotationRetention.BINARY)
 annotation class WebSocketChannel(val value: String = "")
 
+@Qualifier
+annotation class Constant()
+

@@ -1,28 +1,59 @@
 package com.asteriatech.mobile.data.remote.websocket
 
-import com.asteriatech.mobile.data.model.WebSocketMessage
-import com.asteriatech.mobile.data.remote.websocket.common.WebSocketListener
+import android.util.Log
+import com.asteriatech.mobile.data.remote.websocket.model.WebSocketActionMessage
+import com.asteriatech.mobile.data.remote.websocket.listeners.WebSocketThermalDataListener
+import com.asteriatech.mobile.data.remote.websocket.model.WebSocketThermalDataMessage
 import com.asteriatech.mobile.di.WebSocketChannel
 import com.asteriatech.mobile.di.WebSocketChannels
 import com.google.gson.Gson
+import com.google.gson.JsonSyntaxException
+import com.google.gson.reflect.TypeToken
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import okhttp3.WebSocket
+import org.json.JSONObject
 import javax.inject.Inject
 
 class WebSocketThermalDataChannelClient @Inject constructor(
     @WebSocketChannel(WebSocketChannels.THERMAL_DATA_CHANNEL) private val request: Request,
-    private val client:OkHttpClient
+    private val client: OkHttpClient
 ) {
     /**
      * listener: listener
      */
-    private lateinit var listener: WebSocketListener
+    private lateinit var listener: WebSocketThermalDataListener
     private lateinit var webSocket: WebSocket
 
-    fun setListener(listener: WebSocketListener) {
+    fun setListener(listener: WebSocketThermalDataListener) {
         this.listener = listener
+    }
+
+    private fun parseMatrixFromJson(json: String): List<List<Double>> {
+        val gson = Gson()
+        return try {
+            // JSON verisini düz bir liste olarak al
+            val flatListType = object : TypeToken<List<Double>>() {}.type
+            val flatList: List<Double> = gson.fromJson(json, flatListType)
+
+            // Düz listeyi 24x32 matrisine dönüştür
+            val rows = 24
+            val cols = 32
+            val matrix = mutableListOf<List<Double>>()
+
+            for (i in 0 until rows) {
+                val start = i * cols
+                val end = start + cols
+                matrix.add(flatList.subList(start, end))
+            }
+
+            matrix
+        } catch (e: JsonSyntaxException) {
+            // Hata durumunda bir boş liste döndürün veya uygun bir hata işleme yapın
+            e.printStackTrace()
+            emptyList()
+        }
     }
 
     fun connect() {
@@ -32,8 +63,35 @@ class WebSocketThermalDataChannelClient @Inject constructor(
             }
 
             override fun onMessage(webSocket: WebSocket, text: String) {
-                // process the message directly
-                listener.onMessageReceived(WebSocketMessage("text", text,"100"))
+                //get purse json object from text
+                val jsonObject = JSONObject(text)
+                //get json keys
+                val keys = jsonObject.keys()
+
+                //get first member of the json
+                val firstKey = if (keys.hasNext()) keys.next() else null
+                val firstValue = firstKey?.let { jsonObject.get(it) }
+
+                //get second member of the json
+                val secondKey = if (keys.hasNext()) keys.next() else null
+                val secondValue = secondKey?.let { jsonObject.get(it) }
+
+                //process thermal data
+                val thermalImageArray = firstValue?.toString()?.let { parseMatrixFromJson(it) }
+
+                //process thermal data result
+                val isDetected = secondValue?.toString().let {
+                    it == "detected"
+                }
+
+                //combine both of them ( process data and resul)
+                val websocketThermalDataMessage = WebSocketThermalDataMessage(
+                    thermalImageArray = parseMatrixFromJson(firstValue.toString()),
+                    isTargetDetected = isDetected
+
+                )
+                //send to listener
+                listener.onMessageReceived(websocketThermalDataMessage)
             }
 
             override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
@@ -46,13 +104,4 @@ class WebSocketThermalDataChannelClient @Inject constructor(
         })
     }
 
-    fun sendMessage(message: WebSocketMessage) {
-        if (::webSocket.isInitialized) {
-            val jsonMessage = Gson().toJson(message)
-            webSocket.send(jsonMessage)
-        } else {
-            listener.onError("WebSocket is not initialized")
-        }
-
-    }
 }

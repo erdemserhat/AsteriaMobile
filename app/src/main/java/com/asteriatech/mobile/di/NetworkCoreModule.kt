@@ -1,7 +1,8 @@
 package com.asteriatech.mobile.di
 
 //import com.asteriatech.mobile.data.remote.websocket.EchoWebSocketListener
-import com.asteriatech.mobile.data.remote.websocket.common.WebSocketListenerImpl
+import com.asteriatech.mobile.data.remote.websocket.listeners.WebSocketActionListenerImpl
+import com.asteriatech.mobile.data.remote.websocket.listeners.WebSocketThermalDataListenerImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,15 +35,24 @@ object NetworkCoreModule {
         client: OkHttpClient
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(CommunicationProtocolType.HTTP +ServerInformation.SERVER_IP+ServerInformation.SERVER_PORT)
+            .baseUrl(
+                CustomURL.Builder()
+                    .communicationProtocolType(CommunicationProtocolType.HTTP)
+                    .build()
+            )
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
 
     @Provides
-    fun provideWebSocketListenerImpl(): WebSocketListenerImpl {
-        return WebSocketListenerImpl()
+    fun provideWebSocketListenerImpl(): WebSocketActionListenerImpl {
+        return WebSocketActionListenerImpl()
+    }
+
+    @Provides
+    fun provideWebSocketThermalDataListenerImpl(): WebSocketThermalDataListenerImpl {
+        return WebSocketThermalDataListenerImpl()
     }
 
 
