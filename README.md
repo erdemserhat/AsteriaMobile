@@ -1,12 +1,11 @@
 # Central Vision System
 
-AsteriaTech Mobile is a cutting-edge mobile app for controlling a vision system, developed with Android Jetpack Compose. It provides real-time control and both thermal and normal image data from the vision system via WebSocket communication. The vision system features a servo motor for horizontal movement and cameras for data capture, which is sent to a server and then to the Android client.
+AsteriaTech Mobile is a mobile app for controlling a vision system, developed with Android Jetpack Compose. It provides real-time control and both thermal and normal image data from the vision system via WebSocket communication. The vision system features a servo motor for horizontal movement and cameras for data capture, which is sent to a server and then to the Android client.
 
 **Key Features:**
 - **Real-time Control**: Precise servo movements.
 - **Live Telemetry**: Real-time normal and thermal camera data.
 - **WebSocket Communication**: Efficient, reliable data transmission with two channels.
-- **User-friendly Interface**: Intuitive design with Jetpack Compose.
 - **Detection Alerts**: Notifications for detected living presence.
 - **Command Execution**: Adjust system orientation.
 - **Efficient Data Handling**: Smooth operations with Retrofit, Coil, and ExoPlayer.
