@@ -1,8 +1,6 @@
-package com.asteriatech.mobile
+package com.asteriatech.mobile.presentation.viewmodels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
-import com.asteriatech.mobile.data.remote.websocket.model.WebSocketActionMessage
 import com.asteriatech.mobile.data.repository.WebSocketServoEngineControllerChannelRepository
 import com.asteriatech.mobile.di.WebSocketChannel
 import com.asteriatech.mobile.di.WebSocketChannels

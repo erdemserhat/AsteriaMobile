@@ -1,4 +1,4 @@
-package com.asteriatech.mobile.presentation
+package com.asteriatech.mobile.presentation.composables
 
 import androidx.compose.ui.graphics.Color
 
