@@ -64,6 +64,9 @@ class WebSocketThermalDataChannelClient @Inject constructor(
 
             override fun onMessage(webSocket: WebSocket, text: String) {
                 //get purse json object from text
+                // Gelen veriyi loglayarak kontrol edin
+                Log.d("WebSocketMessage", text)
+
                 val jsonObject = JSONObject(text)
                 //get json keys
                 val keys = jsonObject.keys()
@@ -81,25 +84,30 @@ class WebSocketThermalDataChannelClient @Inject constructor(
 
                 //process thermal data result
                 val isDetected = secondValue?.toString().let {
-                    it == "detected"
+                    it == "Detected"
                 }
+
+                Log.d("fsfdsfds",isDetected.toString())
 
                 //combine both of them ( process data and resul)
                 val websocketThermalDataMessage = WebSocketThermalDataMessage(
-                    thermalImageArray = parseMatrixFromJson(firstValue.toString()),
+                    thermalImageArray = thermalImageArray!!,
                     isTargetDetected = isDetected
 
                 )
                 //send to listener
+                Log.d("erdem1212","webSocketThermalDataMessages.toString()")
                 listener.onMessageReceived(websocketThermalDataMessage)
             }
 
             override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
+
                 listener.onClose()
             }
 
             override fun onFailure(webSocket: WebSocket, t: Throwable, response: Response?) {
                 listener.onError(t.message ?: "Unknown error")
+                Log.d("logcatTestTracing1",t.message.toString())
             }
         })
     }
