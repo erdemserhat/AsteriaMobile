@@ -76,6 +76,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.runtime.livedata)
+    implementation(libs.androidx.media3.common)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -114,6 +115,10 @@ dependencies {
     implementation(libs.accompanistPagerIndicators)
     implementation(libs.pagingCommonAndroid)
     implementation(kotlin("reflect"))
+
+    implementation ("com.google.android.exoplayer:exoplayer-core:2.18.1")
+    implementation ("com.google.android.exoplayer:exoplayer-ui:2.18.1")
+   // implementation ("com.google.accompanist:accompanist-exoplayer:0.24.13-rc")
 
 
 }

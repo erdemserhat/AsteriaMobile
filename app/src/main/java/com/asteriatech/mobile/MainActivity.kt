@@ -36,8 +36,10 @@ class MainActivity : ComponentActivity() {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        //sendGetRequest("http://192.168.142.172:8000/rotate-right")
         super.onCreate(savedInstanceState)
         setContent {
+
             AsteriaMobileTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
@@ -48,8 +50,6 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
-
-
 
 }
 

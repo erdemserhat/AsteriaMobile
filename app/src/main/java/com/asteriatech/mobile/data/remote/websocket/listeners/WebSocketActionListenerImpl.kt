@@ -1,5 +1,6 @@
 package com.asteriatech.mobile.data.remote.websocket.listeners
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.asteriatech.mobile.data.remote.websocket.model.WebSocketActionMessage
 import javax.inject.Inject
@@ -9,6 +10,7 @@ class WebSocketActionListenerImpl @Inject constructor() : WebSocketActionListene
 
     override fun onOpen() {
         // Bağlantı açıldığında yapılacak işlemler
+
     }
 
     override fun onMessageReceived(message: WebSocketActionMessage) {

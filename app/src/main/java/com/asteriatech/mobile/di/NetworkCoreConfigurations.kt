@@ -28,7 +28,7 @@ enum class CommunicationProtocolType(val protocol: String) {
 
 
 object ServerInformation {
-    const val SERVER_IP = "192.168.201.133"
+    const val SERVER_IP = "192.168.142.207"
     const val SERVER_PORT = "8080"
 
     object EndPoints {
