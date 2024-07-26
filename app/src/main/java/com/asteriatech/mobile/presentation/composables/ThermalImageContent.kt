@@ -1,4 +1,4 @@
-package com.asteriatech.mobile.presentation
+package com.asteriatech.mobile.presentation.composables
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
