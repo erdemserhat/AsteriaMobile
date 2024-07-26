@@ -1,10 +1,11 @@
-# Drone Control Mobile Application
+# Central Vision System
 
-A mobile application for controlling a drone, developed using Android Jetpack Compose. This app provides real-time control and telemetry data from the drone through WebSocket communication. The project is currently in development, aiming to deliver a user-friendly interface for drone enthusiasts and developers.
+A mobile application for controlling a vision system, developed using Android Jetpack Compose. This app provides real-time control and thermal & normal image data from the vision system through WebSocket communication
+
 
 ## Features
-- **Real-time Control**: The app allows users to control the drone's movements in real time.
-- **Live Telemetry**: Receive live data from the drone, including altitude, speed, and battery status.
+- **Real-time Control**: The app allows users to control the servo movements in real time.
+- **Live Telemetry**: Receive live nromal & thermal camera data from the vision system
 - **WebSocket Communication**: Utilizes WebSocket for efficient and reliable communication with the drone's server.
 - **User-friendly Interface**: Designed with an intuitive interface using Jetpack Compose to ensure ease of use for users of all skill levels.
 
@@ -12,17 +13,19 @@ A mobile application for controlling a drone, developed using Android Jetpack Co
 - **Android Jetpack Compose**: For modern, declarative UI development.
 - **Kotlin**: The programming language used for Android development.
 - **WebSocket**: For real-time communication between the app and the drone.
+- 
+# Project Presentation
 
-## Development Status
-The project is currently under active development. We are continuously adding new features and improving the user experience. Stay tuned for updates!
+## System Operation video
 
-# Mockups
+https://github.com/user-attachments/assets/f27daf81-2f54-4b01-9a8d-2659113ff472
 
-![image](https://github.com/user-attachments/assets/12563499-d33e-42be-9bc1-77bf71a44c57)
+## System Operation Overview
 
-![image](https://github.com/user-attachments/assets/e816be7d-bffc-4d4c-9a2d-da921164ec4a)
+![photo_2024-07-26_16-23-04](https://github.com/user-attachments/assets/a291569e-dd2d-4490-a906-365101d949e1)
 
-![image](https://github.com/user-attachments/assets/db208de8-d9f1-4d9f-aea6-d61ae5e5403e)
+
+
 
 
 
