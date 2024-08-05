@@ -26,6 +26,14 @@ AsteriaTech Mobile is a mobile app for controlling a vision system, developed wi
 
 # Project Presentation
 
+## Presentation Video (Turkish)
+
+https://github.com/user-attachments/assets/1f2f32d0-3dd9-4df5-8714-1fbf95907572
+
+
+
+
+
 ## System Operation Video
 [Watch Here](https://github.com/user-attachments/assets/f27daf81-2f54-4b01-9a8d-2659113ff472)
 
